@@ -3,14 +3,14 @@
   "id": "modid",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "PlayerEx-Wizards Compat",
+  "description": "Allows improving your Wizarding spell stats through leveing up in PlayerEx",
   "authors": [
-    "Me!"
+    "Sewdohe"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Sewdohe/PlayerEx-Wizards-Compat"
   },
 
   "license": "CC0-1.0",
@@ -29,8 +29,9 @@
   "depends": {
     "fabricloader": ">=0.14.14",
     "fabric-api": "*",
-    "minecraft": "~1.19.3",
-    "java": ">=17"
+    "minecraft": "~1.19.2",
+    "java": ">=17",
+    "spell_power": "0.9.7+1.19"
   },
   "suggests": {
     "another-mod": "*"
