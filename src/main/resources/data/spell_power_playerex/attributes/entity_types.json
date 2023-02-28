@@ -1,9 +1,0 @@
-{
-    "values": {
-        "minecraft:player": {
-            "spell_power_playerex:crit_chance_factor": 0.0,
-            "spell_power_playerex:crit_damage_factor": 0.0,
-            "spell_power_playerex:spell_power_all": 0.0
-        }
-    }
-}
