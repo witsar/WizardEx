@@ -41,25 +41,25 @@
         "wizardex:spell_power_fire": {
             "spell_power:fire": {
                 "behaviour": "ADDITION",
-                "value": 1.0
+                "value": 0.5
             }
         },
         "wizardex:spell_power_frost": {
             "spell_power:frost": {
                 "behaviour": "ADDITION",
-                "value": 1.0
+                "value": 0.5
             }
         },
         "wizardex:spell_power_lightning": {
             "spell_power:lightning": {
                 "behaviour": "ADDITION",
-                "value": 1.0
+                "value": 0.5
             }
         },
         "wizardex:spell_power_arcane": {
             "spell_power:arcane": {
                 "behaviour": "ADDITION",
-                "value": 1.0
+                "value": 0.5
             }
         }
     }
