@@ -1,6 +1,6 @@
-package net.fabricmc.example.mixin;
+package net.fabricmc.wizardex.mixin;
 
-import net.fabricmc.example.ExampleMod;
+import net.fabricmc.wizardex.ExampleMod;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

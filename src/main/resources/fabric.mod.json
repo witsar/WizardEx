@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "wizardex",
   "version": "${version}",
 
-  "name": "PlayerEx-Wizards Compat",
+  "name": "WizardEx",
   "description": "Allows improving your Wizarding spell stats through leveing up in PlayerEx",
   "authors": [
     "Sewdohe"
@@ -19,11 +19,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "net.fabricmc.wizardex.WizardEx"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "wizardex.mixins.json"
   ],
 
   "depends": {

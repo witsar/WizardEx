@@ -1,9 +1,9 @@
 {
     "values": {
-        "spell_power_playerex:crit_chance_factor": {
+        "wizardex:crit_chance_factor": {
             "percentage": "100.0"
         },
-        "spell_power_playerex:crit_damage_factor": {
+        "wizardex:crit_damage_factor": {
             "percentage": "1000.0"
         }
     }
