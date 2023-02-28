@@ -120,6 +120,12 @@ public class MagicPageLayer extends PageLayer {
 //                (this.y + 85) / scaleY.get(), 4210752);
         this.textRenderer.draw(matrices, Text.of("Arcane:   levels"), (this.x + 30) / scaleX.get(),
                 (this.y + 85) / scaleY.get(), 4210752);
+// Crit chance and power display are broken
+//        this.textRenderer.draw(matrices, Text.of("Crit Chance: "), (this.x + 10) / scaleX.get(),
+//                (this.y + 105) / scaleY.get(), 4210752);
+//
+//        this.textRenderer.draw(matrices, Text.of("Crit Multiplier: "), (this.x + 10) / scaleX.get(),
+//                (this.y + 120) / scaleY.get(), 4210752);
 
         matrices.pop();
 
@@ -209,6 +215,16 @@ public class MagicPageLayer extends PageLayer {
         return spellPowerSupplier;
     }
 
+    public static Supplier<EntityAttribute> GetSpellPowerCritChance() {
+        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_crit_chance);
+        return spellPowerSupplier;
+    }
+
+    public static Supplier<EntityAttribute> GetSpellPowerCritDamage() {
+        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_crit_damage);
+        return spellPowerSupplier;
+    }
+
     static {
         // SECTION: Show Skill Points/Level
         COMPONENTS.add(RenderComponent.of(ExAPI.LEVEL, value -> {
@@ -276,11 +292,32 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(intValue));
         }, value -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("Arcane Specalization")));
+            tooltip.add((Text.of("Arcane Specialization")));
 
              ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerArcane());
             return tooltip;
         }, 59, 85));
+
+        // Crit chance and Crit damage are bugged upsteam and display wrong values
+        // TODO: Fix when upstream fixes
+//        COMPONENTS.add(RenderComponent.of(GetSpellPowerCritChance(), value -> {
+//            return Text.of(value.toString() + "%");
+//        }, value -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.of("spell critical chance")));
+//
+//            ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerCritChance());
+//            return tooltip;
+//        }, 65, 105));
+//        COMPONENTS.add(RenderComponent.of(GetSpellPowerCritDamage(), value -> {
+//            return Text.of(value.toString() + "%");
+//        }, value -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.of("spell critical chance")));
+//
+//            ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerCritChance());
+//            return tooltip;
+//        }, 65, 120));
 
 
 

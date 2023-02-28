@@ -3,13 +3,13 @@
         "wizardex:crit_chance_factor": {
             "spell_power:critical_chance": {
                 "behaviour": "ADDITION",
-                "value": 100.0
+                "value": 0.05
             }
         },
         "wizardex:crit_damage_factor": {
             "spell_power:critical_damage": {
                 "behaviour": "ADDITION",
-                "value": 1000.0
+                "value": 10
             }
         },
         "wizardex:spell_power_all": {
