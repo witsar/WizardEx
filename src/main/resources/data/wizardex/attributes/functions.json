@@ -1,0 +1,42 @@
+{
+    "values": {
+        "spell_power_playerex:crit_chance_factor": {
+            "spell_power:critical_chance": {
+                "behaviour": "ADDITION",
+                "value": 100.0
+            }
+        },
+        "spell_power_playerex:crit_damage_factor": {
+            "spell_power:critical_damage": {
+                "behaviour": "ADDITION",
+                "value": 1000.0
+            }
+        },
+        "spell_power_playerex:spell_power_all": {
+            "spell_power:arcane": {
+                "behaviour": "ADDITION",
+                "value": 1.0
+            },
+            "spell_power:fire": {
+                "behaviour": "ADDITION",
+                "value": 1.0
+            },
+            "spell_power:soul": {
+                "behaviour": "ADDITION",
+                "value": 1.0
+            },
+            "spell_power:healing": {
+                "behaviour": "ADDITION",
+                "value": 1.0
+            },
+            "spell_power:lightning": {
+                "behaviour": "ADDITION",
+                "value": 1.0
+            },
+            "spell_power:frost": {
+                "behaviour": "ADDITION",
+                "value": 1.0
+            }
+        }
+    }
+}
