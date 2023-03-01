@@ -1,5 +1,6 @@
 package net.fabricmc.wizardex;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -120,12 +121,12 @@ public class MagicPageLayer extends PageLayer {
 //                (this.y + 85) / scaleY.get(), 4210752);
         this.textRenderer.draw(matrices, Text.of("Arcane:   levels"), (this.x + 30) / scaleX.get(),
                 (this.y + 85) / scaleY.get(), 4210752);
-// Crit chance and power display are broken
-//        this.textRenderer.draw(matrices, Text.of("Crit Chance: "), (this.x + 10) / scaleX.get(),
-//                (this.y + 105) / scaleY.get(), 4210752);
-//
-//        this.textRenderer.draw(matrices, Text.of("Crit Multiplier: "), (this.x + 10) / scaleX.get(),
-//                (this.y + 120) / scaleY.get(), 4210752);
+
+        this.textRenderer.draw(matrices, Text.of("Crit Chance: "), (this.x + 95) / scaleX.get(),
+                (this.y + 50) / scaleY.get(), 4210752);
+
+        this.textRenderer.draw(matrices, Text.of("Crit Multiplier: "), (this.x + 95) / scaleX.get(),
+                (this.y + 65) / scaleY.get(), 4210752);
 
         matrices.pop();
 
@@ -260,7 +261,7 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(intValue));
         }, value -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("Fire Specalization")));
+            tooltip.add((Text.of("Fire Specialization")));
 
             ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerFire());
             return tooltip;
@@ -271,7 +272,7 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(intValue));
         }, value -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("Frost Specalization")));
+            tooltip.add((Text.of("Frost Specialization")));
 
             ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerFrost());
             return tooltip;
@@ -281,7 +282,7 @@ public class MagicPageLayer extends PageLayer {
 //            return Text.of(value.toString());
 //        }, value -> {
 //            List<Text> tooltip = new ArrayList<Text>();
-//            tooltip.add((Text.of("Lightning Specalization")));
+//            tooltip.add((Text.of("Lightning Specialization")));
 //
 //            // ClientUtil.appendChildrenToTooltip(tooltip, ExAPI.CONSTITUTION);
 //            return tooltip;
@@ -298,26 +299,27 @@ public class MagicPageLayer extends PageLayer {
             return tooltip;
         }, 59, 85));
 
-        // Crit chance and Crit damage are bugged upsteam and display wrong values
-        // TODO: Fix when upstream fixes
-//        COMPONENTS.add(RenderComponent.of(GetSpellPowerCritChance(), value -> {
-//            return Text.of(value.toString() + "%");
-//        }, value -> {
-//            List<Text> tooltip = new ArrayList<Text>();
-//            tooltip.add((Text.of("spell critical chance")));
-//
-//            ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerCritChance());
-//            return tooltip;
-//        }, 65, 105));
-//        COMPONENTS.add(RenderComponent.of(GetSpellPowerCritDamage(), value -> {
-//            return Text.of(value.toString() + "%");
-//        }, value -> {
-//            List<Text> tooltip = new ArrayList<Text>();
-//            tooltip.add((Text.of("spell critical chance")));
-//
-//            ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerCritChance());
-//            return tooltip;
-//        }, 65, 120));
+
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            var critChance = SpellPower.getCriticalChance(entity) * 100;
+            var statFormatted = new DecimalFormat("###");
+            return Text.of( statFormatted.format(critChance) + "%");
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add((Text.of("magic crit chance")));
+            tooltip.add((Text.of("includes item bonuses")));
+            return tooltip;
+        }, 143, 50));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            var critDmg = SpellPower.getCriticalMultiplier(entity) * 100;
+            var statFormatted = new DecimalFormat("###");
+            return Text.of(statFormatted.format(critDmg) + "%");
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add((Text.of("magic crit multiplier")));
+            tooltip.add((Text.of("includes item bonuses")));
+            return tooltip;
+        }, 147, 65));
 
 
 
@@ -325,9 +327,9 @@ public class MagicPageLayer extends PageLayer {
         // show resulting stats from SpellPower API
         // -----------------------------------------
         COMPONENTS.add(RenderComponent.of(entity -> {
-            var fireSchool = SpellPower.getSpellPower(MagicSchool.FIRE, entity);
-            var fireValue = fireSchool.baseValue();
-            return Text.of(String.valueOf(fireValue));
+            var school = SpellPower.getSpellPower(MagicSchool.FIRE, entity);
+            var value = school.baseValue();
+            return Text.of(String.valueOf(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
             tooltip.add((Text.of("current fire bonus")));
