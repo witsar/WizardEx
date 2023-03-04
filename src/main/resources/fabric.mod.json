@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.fabricmc.wizardex.WizardEx"
+    ],
+    "client": [
+      "net.fabricmc.wizardex.WizardExClient"
     ]
   },
   "mixins": [
