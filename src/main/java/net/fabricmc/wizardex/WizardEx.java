@@ -22,7 +22,7 @@ public class WizardEx implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("WizardEx -------------------------");
-	private static final Identifier magicIcon = new Identifier("wizardex:textures/gui/staff.png");
+	
 
 	// Overall spell stat gain from int levels
 	public static final Identifier spell_power_all = new Identifier("wizardex:spell_power_all");
@@ -42,11 +42,21 @@ public class WizardEx implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Starting WizardEx!");
-		RegisterSpellPowerPage();
+		registerRefundConditions();
 	}
-
-	public void RegisterSpellPowerPage() {
-		PageRegistry.registerPage(new Identifier("wizardex", "magic"), magicIcon, Text.of("Magic"));
-		PageRegistry.registerLayer(new Identifier("wizardex", "magic"), MagicPageLayer::new);
+	
+	private void registerRefundConditions() {
+		ExAPI.registerRefundCondition((data, player) -> {
+			var attribute = EntityAttributeSupplier.of(spell_power_fire);
+			return DataAttributesAPI.ifPresent(player, attribute, 0.0D, value -> data.get(attribute));
+		});
+		ExAPI.registerRefundCondition((data, player) -> {
+			var attribute = EntityAttributeSupplier.of(spell_power_frost);
+			return DataAttributesAPI.ifPresent(player, attribute, 0.0D, value -> data.get(attribute));
+		});
+		ExAPI.registerRefundCondition((data, player) -> {
+			var attribute = EntityAttributeSupplier.of(spell_power_arcane);
+			return DataAttributesAPI.ifPresent(player, attribute, 0.0D, value -> data.get(attribute));
+		});
 	}
 }
