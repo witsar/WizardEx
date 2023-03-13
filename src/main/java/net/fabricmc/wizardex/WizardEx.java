@@ -1,13 +1,13 @@
 package net.fabricmc.wizardex;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.github.clevernucleus.playerex.api.client.PageRegistry;
+
+import com.github.clevernucleus.dataattributes.api.DataAttributesAPI;
+import com.github.clevernucleus.playerex.api.EntityAttributeSupplier;
+import com.github.clevernucleus.playerex.api.ExAPI;
 
 
 public class WizardEx implements ModInitializer {

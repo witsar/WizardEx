@@ -141,7 +141,7 @@ public class MagicPageLayer extends PageLayer {
         RenderSystem.setShaderTexture(0, schools);
 
         // Fire Icon
-        this.drawTexture(matrices, this.x + 6, this.y + 38, 0, 0, 16, 16);
+        this.drawTexture(matrices, this.x + 7, this.y + 38, 0, 0, 16, 16);
         // Frost Icon
         this.drawTexture(matrices, this.x + 8, this.y + 58, 16, 0, 16, 16);
         // Lightning Icon
