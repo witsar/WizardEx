@@ -1,11 +1,5 @@
 package net.fabricmc.wizardex;
 
-import com.github.clevernucleus.dataattributes.DataAttributes;
-import com.github.clevernucleus.dataattributes.DataAttributesClient;
-import com.github.clevernucleus.dataattributes.api.DataAttributesAPI;
-import com.github.clevernucleus.dataattributes.api.event.EntityAttributeModifiedEvents;
-import com.github.clevernucleus.playerex.api.EntityAttributeSupplier;
-import com.github.clevernucleus.playerex.api.ExAPI;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
@@ -13,7 +7,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.spell_power.api.attributes.EntityAttributes_SpellPower;
 import com.github.clevernucleus.playerex.api.client.PageRegistry;
 
 
@@ -40,7 +33,6 @@ public class WizardEx implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-
 		LOGGER.info("Starting WizardEx!");
 		registerRefundConditions();
 	}
