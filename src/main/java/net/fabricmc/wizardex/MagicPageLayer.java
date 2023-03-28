@@ -113,19 +113,19 @@ public class MagicPageLayer extends PageLayer {
 //        this.textRenderer.draw(matrices, Text.of("into specific schools of magic"), (this.x + 15) /
 //                scaleX.get(), (this.y + 27) / scaleY.get(), 4210752);
 
-        this.textRenderer.draw(matrices, Text.of("Fire:"), (this.x + 25) / scaleX.get(), (this.y + 40) / scaleY.get(),
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.fire_header"), (this.x + 25) / scaleX.get(), (this.y + 40) / scaleY.get(),
                 4210752);
-        this.textRenderer.draw(matrices, Text.of("Frost:"), (this.x + 25) / scaleX.get(), (this.y + 60) / scaleY.get(),
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.frost_header"), (this.x + 25) / scaleX.get(), (this.y + 60) / scaleY.get(),
                 4210752);
-//        this.textRenderer.draw(matrices, Text.of("Lightning: "), (this.x + 30) / scaleX.get(),
+//        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.lightning"), (this.x + 30) / scaleX.get(),
 //                (this.y + 85) / scaleY.get(), 4210752);
-        this.textRenderer.draw(matrices, Text.of("Arcane:"), (this.x + 25) / scaleX.get(),
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.arcane_header"), (this.x + 25) / scaleX.get(),
                 (this.y + 80) / scaleY.get(), 4210752);
 
-        this.textRenderer.draw(matrices, Text.of("Crit Chance: "), (this.x + 95) / scaleX.get(),
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.crit_chance_header"), (this.x + 95) / scaleX.get(),
                 (this.y + 50) / scaleY.get(), 4210752);
 
-        this.textRenderer.draw(matrices, Text.of("Crit Multiplier: "), (this.x + 95) / scaleX.get(),
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.crit_damage_header"), (this.x + 95) / scaleX.get(),
                 (this.y + 65) / scaleY.get(), 4210752);
 
         matrices.pop();
@@ -248,8 +248,8 @@ public class MagicPageLayer extends PageLayer {
             List<Text> tooltip = new ArrayList<Text>();
             tooltip.add((Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[0]")).formatted(Formatting.GRAY));
             tooltip.add((Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[1]")).formatted(Formatting.GRAY));
-            tooltip.add(Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[0]").formatted(Formatting.GRAY));
-            tooltip.add(Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[1]").formatted(Formatting.GRAY));
+           // tooltip.add(Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[0]").formatted(Formatting.GRAY));
+           // tooltip.add(Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[1]").formatted(Formatting.GRAY));
             return tooltip;
         }, 8, 25));
 
@@ -261,7 +261,7 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(intValue));
         }, value -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("Fire Specialization")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.fire_specialization")));
 
             ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerFire());
             return tooltip;
@@ -272,7 +272,7 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(intValue));
         }, value -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("Frost Specialization")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.frost_specialization")));
 
             ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerFrost());
             return tooltip;
@@ -282,7 +282,7 @@ public class MagicPageLayer extends PageLayer {
 //            return Text.of(value.toString());
 //        }, value -> {
 //            List<Text> tooltip = new ArrayList<Text>();
-//            tooltip.add((Text.of("Lightning Specialization")));
+//            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.lightning_specialization")));
 //
 //            // ClientUtil.appendChildrenToTooltip(tooltip, ExAPI.CONSTITUTION);
 //            return tooltip;
@@ -293,7 +293,7 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(intValue));
         }, value -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("Arcane Specialization")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.arcane_specialization")));
 
              ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerArcane());
             return tooltip;
@@ -306,8 +306,8 @@ public class MagicPageLayer extends PageLayer {
             return Text.of( statFormatted.format(critChance) + "%");
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("magic crit chance")));
-            tooltip.add((Text.of("includes item bonuses")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.crit_chance")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
             return tooltip;
         }, 143, 50));
         COMPONENTS.add(RenderComponent.of(entity -> {
@@ -316,8 +316,8 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(statFormatted.format(critDmg) + "%");
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("magic crit multiplier")));
-            tooltip.add((Text.of("includes item bonuses")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.crit_damage")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
             return tooltip;
         }, 147, 65));
 
@@ -332,8 +332,8 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("current fire bonus")));
-            tooltip.add((Text.of("includes item bonuses")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.fire_bonus")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
             return tooltip;
         }, 32, 47));
         COMPONENTS.add(RenderComponent.of(entity -> {
@@ -342,8 +342,8 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("current frost bonus")));
-            tooltip.add((Text.of("includes item bonuses")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.frost_bonus")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
             return tooltip;
         }, 32, 67));
 //        COMPONENTS.add(RenderComponent.of(entity -> {
@@ -361,8 +361,8 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(String.valueOf(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("current arcane bonus")));
-            tooltip.add((Text.of("includes item bonuses")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.arcane_bonus")));
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
             return tooltip;
         }, 32, 87));
     }
