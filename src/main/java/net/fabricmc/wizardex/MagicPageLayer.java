@@ -16,7 +16,6 @@ import com.github.clevernucleus.playerex.api.PlayerData;
 import com.github.clevernucleus.playerex.api.client.ClientUtil;
 import com.github.clevernucleus.playerex.api.client.PageLayer;
 import com.github.clevernucleus.playerex.api.client.RenderComponent;
-import com.github.clevernucleus.playerex.client.PlayerExClient;
 import com.github.clevernucleus.playerex.client.gui.widget.ScreenButtonWidget;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -319,7 +318,7 @@ public class MagicPageLayer extends PageLayer {
             tooltip.add((Text.translatable("wizardex.gui.page.tooltip.crit_damage")));
             tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
             return tooltip;
-        }, 147, 65));
+        }, 143, 65));
 
 
 
@@ -329,7 +328,8 @@ public class MagicPageLayer extends PageLayer {
         COMPONENTS.add(RenderComponent.of(entity -> {
             var school = SpellPower.getSpellPower(MagicSchool.FIRE, entity);
             var value = school.baseValue();
-            return Text.of(String.valueOf(value));
+            var statFormatted = new DecimalFormat("#.##");
+            return Text.of(statFormatted.format(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
             tooltip.add((Text.translatable("wizardex.gui.page.tooltip.fire_bonus")));
@@ -339,7 +339,8 @@ public class MagicPageLayer extends PageLayer {
         COMPONENTS.add(RenderComponent.of(entity -> {
             var school = SpellPower.getSpellPower(MagicSchool.FROST, entity);
             var value = school.baseValue();
-            return Text.of(String.valueOf(value));
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of(statFormatted.format(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
             tooltip.add((Text.translatable("wizardex.gui.page.tooltip.frost_bonus")));
@@ -358,7 +359,8 @@ public class MagicPageLayer extends PageLayer {
         COMPONENTS.add(RenderComponent.of(entity -> {
             var school = SpellPower.getSpellPower(MagicSchool.ARCANE, entity);
             var value = school.baseValue();
-            return Text.of(String.valueOf(value));
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of(statFormatted.format(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
             tooltip.add((Text.translatable("wizardex.gui.page.tooltip.arcane_bonus")));

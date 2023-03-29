@@ -17,7 +17,7 @@ public class WizardExClient implements ClientModInitializer {
 	}
 	
 	private void registerSpellPowerPage() {
-		PageRegistry.registerPage(magicPage, magicIcon, Text.of("Magic"));
+		PageRegistry.registerPage(magicPage, magicIcon, Text.translatable("wizardex.gui.page.title"));
 		PageRegistry.registerLayer(magicPage, MagicPageLayer::new);
 	}
 }
