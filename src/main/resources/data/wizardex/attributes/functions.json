@@ -74,6 +74,12 @@
                 "value": 0.5
             }
         },
+      "wizardex:spell_power_healing": {
+        "spell_power:healing": {
+          "behaviour": "ADDITION",
+          "value": 0.5
+        }
+      },
         "wizardex:spell_power_arcane": {
             "spell_power:arcane": {
                 "behaviour": "ADDITION",

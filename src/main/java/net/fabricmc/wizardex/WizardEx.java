@@ -27,6 +27,7 @@ public class WizardEx implements ModInitializer {
 	public static final Identifier spell_power_arcane = new Identifier("wizardex:spell_power_arcane");
 	public static final Identifier spell_power_crit_chance = new Identifier("spell_power:critical_chance");
 	public static final Identifier spell_power_crit_damage = new Identifier("spell_power:critical_damage");
+	public static Identifier spell_power_healing = new Identifier("wizardex:spell_power_healing");
 
 	@Override
 	public void onInitialize() {

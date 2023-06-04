@@ -49,7 +49,7 @@ public class MagicPageLayer extends PageLayer {
     public static final Identifier schools = new Identifier("wizardex", "textures/gui/schools.png");
 
     private static final List<Identifier> BUTTON_KEYS = ImmutableList.of(WizardEx.spell_power_fire,
-            WizardEx.spell_power_frost, WizardEx.spell_power_arcane);
+            WizardEx.spell_power_frost, WizardEx.spell_power_arcane, WizardEx.spell_power_healing);
 
     public MagicPageLayer(HandledScreen<?> parent, ScreenHandler handler, PlayerInventory inventory, Text title) {
         super(parent, handler, inventory, title);
@@ -116,10 +116,12 @@ public class MagicPageLayer extends PageLayer {
                 4210752);
         this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.frost_header"), (this.x + 25) / scaleX.get(), (this.y + 60) / scaleY.get(),
                 4210752);
-//        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.lightning"), (this.x + 30) / scaleX.get(),
-//                (this.y + 85) / scaleY.get(), 4210752);
         this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.arcane_header"), (this.x + 25) / scaleX.get(),
                 (this.y + 80) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.healing_header"), (this.x + 25) / scaleX.get(),
+                (this.y + 100) / scaleY.get(), 4210752);
+//        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.lightning"), (this.x + 30) / scaleX.get(),
+//        (this.y + 85) / scaleY.get(), 4210752);
 
         this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.crit_chance_header"), (this.x + 95) / scaleX.get(),
                 (this.y + 50) / scaleY.get(), 4210752);
@@ -143,11 +145,12 @@ public class MagicPageLayer extends PageLayer {
         this.drawTexture(matrices, this.x + 7, this.y + 38, 0, 0, 16, 16);
         // Frost Icon
         this.drawTexture(matrices, this.x + 8, this.y + 58, 16, 0, 16, 16);
-        // Lightning Icon
-//        this.drawTexture(matrices, this.x + 8, this.y + 85, 32, 0, 16, 16);
         // Arcane Icon
         this.drawTexture(matrices, this.x + 8, this.y + 78, 48, 0, 16, 16);
+        // Healing Icon
+        this.drawTexture(matrices, this.x + 8, this.y + 105, 64, 0, 16, 16);
 
+        // add the button to level up each school of magic
         this.forEachScreenButton(button -> {
 			Identifier key = button.key();
 			Identifier lvl = new Identifier("playerex:level");
@@ -186,8 +189,8 @@ public class MagicPageLayer extends PageLayer {
         // Fire level button
         this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 40, 204, 0, 11, 10, BUTTON_KEYS.get(0), this::buttonPressed, this::buttonTooltip));
         this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 60, 204, 0, 11, 10, BUTTON_KEYS.get(1), this::buttonPressed, this::buttonTooltip));
-//      this.addDrawableChild(new ScreenButtonWidget(this.parent, 70, 92, 204, 0, 11, 10, BUTTON_KEYS.get(2), this::buttonPressed, this::buttonTooltip));
         this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 80, 204, 0, 11, 10, BUTTON_KEYS.get(2), this::buttonPressed, this::buttonTooltip));
+        this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 100, 204, 0, 11, 10, BUTTON_KEYS.get(3), this::buttonPressed, this::buttonTooltip));
     }
 
     public static Supplier<EntityAttribute> GetSpellPowerAll() {
@@ -207,6 +210,11 @@ public class MagicPageLayer extends PageLayer {
 
     public static Supplier<EntityAttribute> GetSpellPowerLightning() {
         Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_lightning);
+        return spellPowerSupplier;
+    }
+
+    public static Supplier<EntityAttribute> GetSpellPowerHealing() {
+        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_healing);
         return spellPowerSupplier;
     }
 
@@ -277,16 +285,6 @@ public class MagicPageLayer extends PageLayer {
             return tooltip;
         }, 56, 60));
 
-//        COMPONENTS.add(RenderComponent.of(GetSpellPowerLightning(), value -> {
-//            return Text.of(value.toString());
-//        }, value -> {
-//            List<Text> tooltip = new ArrayList<Text>();
-//            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.lightning_specialization")));
-//
-//            // ClientUtil.appendChildrenToTooltip(tooltip, ExAPI.CONSTITUTION);
-//            return tooltip;
-//        }, 65, 85));
-
         COMPONENTS.add(RenderComponent.of(GetSpellPowerArcane(), value -> {
             var intValue = value.intValue();
             return Text.of(String.valueOf(intValue));
@@ -297,6 +295,17 @@ public class MagicPageLayer extends PageLayer {
              ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerArcane());
             return tooltip;
         }, 56, 80));
+
+        COMPONENTS.add(RenderComponent.of(GetSpellPowerHealing(), value -> {
+            var intValue = value.intValue();
+            return Text.of(String.valueOf(intValue));
+        }, value -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.healing_specialization")));
+
+            // ClientUtil.appendChildrenToTooltip(tooltip, ExAPI.CONSTITUTION);
+            return tooltip;
+        }, 56, 100));
 
 
         COMPONENTS.add(RenderComponent.of(entity -> {
@@ -347,15 +356,15 @@ public class MagicPageLayer extends PageLayer {
             tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
             return tooltip;
         }, 32, 67));
-//        COMPONENTS.add(RenderComponent.of(entity -> {
-//            var school = SpellPower.getSpellPower(MagicSchool.LIGHTNING, entity);
-//            var value = school.baseValue();
-//            return Text.of(String.valueOf(value));
-//        }, entity -> {
-//            List<Text> tooltip = new ArrayList<Text>();
-//            tooltip.add((Text.of("Lightning")));
-//            return tooltip;
-//        }, 32, 95));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            var school = SpellPower.getSpellPower(MagicSchool.HEALING, entity);
+            var value = school.baseValue();
+            return Text.of(String.valueOf(value));
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add((Text.of("Healing")));
+            return tooltip;
+        }, 32, 107));
         COMPONENTS.add(RenderComponent.of(entity -> {
             var school = SpellPower.getSpellPower(MagicSchool.ARCANE, entity);
             var value = school.baseValue();

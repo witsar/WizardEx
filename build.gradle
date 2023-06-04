@@ -101,7 +101,7 @@ dependencies {
 	}
 
 	// Spell power attributes
-	modImplementation "maven.modrinth:spell-power:0.9.7+1.19-fabric"
+	modImplementation "maven.modrinth:spell-power:0.9.12+1.19-fabric"
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

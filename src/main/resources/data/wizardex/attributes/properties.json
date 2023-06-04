@@ -16,6 +16,9 @@
     },
     "spell_power:fire": {
       "weight": "r50:a50:x0.25:y4:z0.25:u0.05:v0.5:w0.01"
+    },
+    "spell_power:healing": {
+      "weight": "r50:a50:x0.25:y4:z0.25:u0.05:v0.5:w0.01"
     }
   }
 }
