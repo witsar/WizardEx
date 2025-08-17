@@ -27,7 +27,13 @@ public class WizardEx implements ModInitializer {
 	public static final Identifier spell_power_arcane = new Identifier("wizardex:spell_power_arcane");
 	public static final Identifier spell_power_crit_chance = new Identifier("spell_power:critical_chance");
 	public static final Identifier spell_power_crit_damage = new Identifier("spell_power:critical_damage");
-	public static Identifier spell_power_healing = new Identifier("wizardex:spell_power_healing");
+	public static final Identifier spell_power_healing = new Identifier("wizardex:spell_power_healing");
+	public static final Identifier spell_power_soul = new Identifier("wizardex:spell_power_soul");
+	public static final Identifier spell_power_haste = new Identifier("wizardex:spell_haste_factor");
+	public static final Identifier magic_damage = new Identifier("playerex:magic_damage");
+	public static final Identifier magic_resist = new Identifier("playerex:magic_resistance");
+    public static final Identifier tamed_damage = new Identifier("playerex:tamed_damage");
+    public static final Identifier tamed_resist = new Identifier("playerex:tamed_resistance");
 
 	@Override
 	public void onInitialize() {
@@ -49,6 +55,18 @@ public class WizardEx implements ModInitializer {
 		});
 		ExAPI.registerRefundCondition((data, player) -> {
 			var attribute = EntityAttributeSupplier.of(spell_power_arcane);
+			return DataAttributesAPI.ifPresent(player, attribute, 0.0D, value -> data.get(attribute));
+		});
+		ExAPI.registerRefundCondition((data, player) -> {
+			var attribute = EntityAttributeSupplier.of(spell_power_healing);
+			return DataAttributesAPI.ifPresent(player, attribute, 0.0D, value -> data.get(attribute));
+		});
+		ExAPI.registerRefundCondition((data, player) -> {
+			var attribute = EntityAttributeSupplier.of(spell_power_lightning);
+			return DataAttributesAPI.ifPresent(player, attribute, 0.0D, value -> data.get(attribute));
+		});
+		ExAPI.registerRefundCondition((data, player) -> {
+			var attribute = EntityAttributeSupplier.of(spell_power_soul);
 			return DataAttributesAPI.ifPresent(player, attribute, 0.0D, value -> data.get(attribute));
 		});
 	}

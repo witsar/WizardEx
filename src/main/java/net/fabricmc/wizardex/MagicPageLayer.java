@@ -22,6 +22,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.wizardex.util.AttributeUtils;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
@@ -33,6 +34,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.spell_power.api.MagicSchool;
 import net.spell_power.api.SpellPower;
 
@@ -112,22 +114,32 @@ public class MagicPageLayer extends PageLayer {
 //        this.textRenderer.draw(matrices, Text.of("into specific schools of magic"), (this.x + 15) /
 //                scaleX.get(), (this.y + 27) / scaleY.get(), 4210752);
 
-        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.fire_header"), (this.x + 25) / scaleX.get(), (this.y + 40) / scaleY.get(),
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.fire_header"), (this.x + 25) / scaleX.get(), (this.y + 25) / scaleY.get(),
                 4210752);
-        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.frost_header"), (this.x + 25) / scaleX.get(), (this.y + 60) / scaleY.get(),
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.frost_header"), (this.x + 25) / scaleX.get(), (this.y + 45) / scaleY.get(),
                 4210752);
         this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.arcane_header"), (this.x + 25) / scaleX.get(),
-                (this.y + 80) / scaleY.get(), 4210752);
-        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.healing_header"), (this.x + 25) / scaleX.get(),
-                (this.y + 100) / scaleY.get(), 4210752);
-//        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.lightning"), (this.x + 30) / scaleX.get(),
-//        (this.y + 85) / scaleY.get(), 4210752);
-
-        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.crit_chance_header"), (this.x + 95) / scaleX.get(),
-                (this.y + 50) / scaleY.get(), 4210752);
-
-        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.crit_damage_header"), (this.x + 95) / scaleX.get(),
                 (this.y + 65) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.healing_header"), (this.x + 25) / scaleX.get(),
+                (this.y + 85) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.lightning_header"), (this.x + 25) / scaleX.get(),
+                (this.y + 105) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.soul_header"), (this.x + 25) / scaleX.get(),
+                (this.y + 125) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.magic_damage_header"), (this.x + 90) / scaleX.get(),
+                (this.y + 20) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.magic_resist_header"), (this.x + 90) / scaleX.get(),
+                (this.y + 35) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.haste_header"), (this.x + 90) / scaleX.get(),
+                (this.y + 50) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.crit_chance_header"), (this.x + 90) / scaleX.get(),
+                (this.y + 65) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.crit_damage_header"), (this.x + 90) / scaleX.get(),
+                (this.y + 80) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.tamed_damage_header"), (this.x + 90) / scaleX.get(),
+                (this.y + 95) / scaleY.get(), 4210752);
+        this.textRenderer.draw(matrices, Text.translatable("wizardex.gui.page.tooltip.tamed_resist_header"), (this.x + 90) / scaleX.get(),
+                (this.y + 110) / scaleY.get(), 4210752);
 
         matrices.pop();
 
@@ -142,13 +154,17 @@ public class MagicPageLayer extends PageLayer {
         RenderSystem.setShaderTexture(0, schools);
 
         // Fire Icon
-        this.drawTexture(matrices, this.x + 7, this.y + 38, 0, 0, 16, 16);
+        this.drawTexture(matrices, this.x + 7, this.y + 18, 0, 0, 16, 16);
         // Frost Icon
-        this.drawTexture(matrices, this.x + 8, this.y + 58, 16, 0, 16, 16);
+        this.drawTexture(matrices, this.x + 8, this.y + 38, 16, 0, 16, 16);
         // Arcane Icon
-        this.drawTexture(matrices, this.x + 8, this.y + 78, 48, 0, 16, 16);
+        this.drawTexture(matrices, this.x + 8, this.y + 58, 48, 0, 16, 16);
         // Healing Icon
-        this.drawTexture(matrices, this.x + 8, this.y + 105, 64, 0, 16, 16);
+        this.drawTexture(matrices, this.x + 8, this.y + 78, 64, 0, 16, 16);
+        // Lightning Icon
+        this.drawTexture(matrices, this.x + 8, this.y + 98, 32, 0, 16, 16);
+        // Soul Icon
+        this.drawTexture(matrices, this.x + 8, this.y + 118, 80, 0, 16, 16);
 
         // add the button to level up each school of magic
         this.forEachScreenButton(button -> {
@@ -187,50 +203,10 @@ public class MagicPageLayer extends PageLayer {
         this.playerData = ExAPI.PLAYER_DATA.get(this.client.player);
 
         // Fire level button
-        this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 40, 204, 0, 11, 10, BUTTON_KEYS.get(0), this::buttonPressed, this::buttonTooltip));
-        this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 60, 204, 0, 11, 10, BUTTON_KEYS.get(1), this::buttonPressed, this::buttonTooltip));
-        this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 80, 204, 0, 11, 10, BUTTON_KEYS.get(2), this::buttonPressed, this::buttonTooltip));
-        this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 100, 204, 0, 11, 10, BUTTON_KEYS.get(3), this::buttonPressed, this::buttonTooltip));
-    }
-
-    public static Supplier<EntityAttribute> GetSpellPowerAll() {
-        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_all);
-        return spellPowerSupplier;
-    }
-
-    public static Supplier<EntityAttribute> GetSpellPowerFire() {
-        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_fire);
-        return spellPowerSupplier;
-    }
-
-    public static Supplier<EntityAttribute> GetSpellPowerFrost() {
-        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_frost);
-        return spellPowerSupplier;
-    }
-
-    public static Supplier<EntityAttribute> GetSpellPowerLightning() {
-        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_lightning);
-        return spellPowerSupplier;
-    }
-
-    public static Supplier<EntityAttribute> GetSpellPowerHealing() {
-        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_healing);
-        return spellPowerSupplier;
-    }
-
-    public static Supplier<EntityAttribute> GetSpellPowerArcane() {
-        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_arcane);
-        return spellPowerSupplier;
-    }
-
-    public static Supplier<EntityAttribute> GetSpellPowerCritChance() {
-        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_crit_chance);
-        return spellPowerSupplier;
-    }
-
-    public static Supplier<EntityAttribute> GetSpellPowerCritDamage() {
-        Supplier<EntityAttribute> spellPowerSupplier = EntityAttributeSupplier.of(WizardEx.spell_power_crit_damage);
-        return spellPowerSupplier;
+        //this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 40, 204, 0, 11, 10, BUTTON_KEYS.get(0), this::buttonPressed, this::buttonTooltip));
+        //this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 60, 204, 0, 11, 10, BUTTON_KEYS.get(1), this::buttonPressed, this::buttonTooltip));
+        //this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 80, 204, 0, 11, 10, BUTTON_KEYS.get(2), this::buttonPressed, this::buttonTooltip));
+        //this.addDrawableChild(new ScreenButtonWidget(this.parent, 69, 100, 204, 0, 11, 10, BUTTON_KEYS.get(3), this::buttonPressed, this::buttonTooltip));
     }
 
     static {
@@ -249,85 +225,148 @@ public class MagicPageLayer extends PageLayer {
 //            tooltip.add(Text.translatable("playerex.gui.page.attributes.tooltip.level[2]", ExAPI.getConfig().skillPointsPerLevelUp()).formatted(Formatting.GRAY));
 //            return tooltip;
 //        }, 80, 130));
-        COMPONENTS.add(RenderComponent.of(entity -> {
-            return Text.translatable("playerex.gui.page.attributes.text.skill_points", ExAPI.PLAYER_DATA.get(entity).skillPoints()).formatted(Formatting.DARK_GRAY);
-        }, entity -> {
-            List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[0]")).formatted(Formatting.GRAY));
-            tooltip.add((Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[1]")).formatted(Formatting.GRAY));
+
+//        COMPONENTS.add(RenderComponent.of(entity -> {
+//            return Text.translatable("playerex.gui.page.attributes.text.skill_points", ExAPI.PLAYER_DATA.get(entity).skillPoints()).formatted(Formatting.DARK_GRAY);
+//        }, entity -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[0]")).formatted(Formatting.GRAY));
+//            tooltip.add((Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[1]")).formatted(Formatting.GRAY));
            // tooltip.add(Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[0]").formatted(Formatting.GRAY));
            // tooltip.add(Text.translatable("playerex.gui.page.attributes.tooltip.skill_points[1]").formatted(Formatting.GRAY));
-            return tooltip;
-        }, 8, 25));
+ //           return tooltip;
+ //       }, 8, 25));
 
         // SECTION: WizardEx Stats
         // add Indiviual magic school stats
         // ----------------------------------
-        COMPONENTS.add(RenderComponent.of(GetSpellPowerFire(), value -> {
-            var intValue = value.intValue();
-            return Text.of(String.valueOf(intValue));
-        }, value -> {
-            List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.fire_specialization")));
+//        COMPONENTS.add(RenderComponent.of(GetSpellPowerFire(), value -> {
+//            var intValue = value.intValue();
+//            return Text.of(String.valueOf(intValue));
+//        }, value -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.fire_specialization")));
+//            ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerFire());
+//            return tooltip;
+//        }, 56, 40));
 
-            ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerFire());
-            return tooltip;
-        }, 56, 40));
+//        COMPONENTS.add(RenderComponent.of(GetSpellPowerFrost(), value -> {
+//            var intValue = value.intValue();
+//            return Text.of(String.valueOf(intValue));
+//        }, value -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.frost_specialization")));
+//            ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerFrost());
+//            return tooltip;
+//        }, 56, 60));
 
-        COMPONENTS.add(RenderComponent.of(GetSpellPowerFrost(), value -> {
-            var intValue = value.intValue();
-            return Text.of(String.valueOf(intValue));
-        }, value -> {
-            List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.frost_specialization")));
+//        COMPONENTS.add(RenderComponent.of(GetSpellPowerArcane(), value -> {
+//            var intValue = value.intValue();
+//            return Text.of(String.valueOf(intValue));
+//        }, value -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.arcane_specialization")));
+//             ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerArcane());
+//            return tooltip;
+//        }, 56, 80));
 
-            ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerFrost());
-            return tooltip;
-        }, 56, 60));
-
-        COMPONENTS.add(RenderComponent.of(GetSpellPowerArcane(), value -> {
-            var intValue = value.intValue();
-            return Text.of(String.valueOf(intValue));
-        }, value -> {
-            List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.arcane_specialization")));
-
-             ClientUtil.appendChildrenToTooltip(tooltip, GetSpellPowerArcane());
-            return tooltip;
-        }, 56, 80));
-
-        COMPONENTS.add(RenderComponent.of(GetSpellPowerHealing(), value -> {
-            var intValue = value.intValue();
-            return Text.of(String.valueOf(intValue));
-        }, value -> {
-            List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.healing_specialization")));
-
+//        COMPONENTS.add(RenderComponent.of(GetSpellPowerHealing(), value -> {
+//            var intValue = value.intValue();
+//            return Text.of(String.valueOf(intValue));
+//        }, value -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.healing_specialization")));
             // ClientUtil.appendChildrenToTooltip(tooltip, ExAPI.CONSTITUTION);
-            return tooltip;
-        }, 56, 100));
+//            return tooltip;
+//        }, 56, 100));
 
+//        COMPONENTS.add(RenderComponent.of(GetSpellPowerLightning(), value -> {
+//            var intValue = value.intValue();
+//            return Text.of(String.valueOf(intValue));
+//        }, value -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.lightning_specialization")));
+            // ClientUtil.appendChildrenToTooltip(tooltip, ExAPI.CONSTITUTION);
+//            return tooltip;
+//        }, 56, 120));
+
+//        COMPONENTS.add(RenderComponent.of(GetSpellPowerSoul(), value -> {
+//            var intValue = value.intValue();
+//            return Text.of(String.valueOf(intValue));
+//        }, value -> {
+//            List<Text> tooltip = new ArrayList<Text>();
+//            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.soul_specialization")));
+            // ClientUtil.appendChildrenToTooltip(tooltip, ExAPI.CONSTITUTION);
+//            return tooltip;
+//        }, 56, 140));
 
         COMPONENTS.add(RenderComponent.of(entity -> {
-            var critChance = SpellPower.getCriticalChance(entity) * 100;
+            EntityAttribute magicDamageAttribute = Registry.ATTRIBUTE.get(WizardEx.magic_damage);
+            var magicDamage = AttributeUtils.getAttributeValue(entity, magicDamageAttribute);
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of(statFormatted.format(magicDamage));
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.magic_damage").styled(style -> style.withColor(Formatting.GRAY)));
+            return tooltip;
+        }, 146, 20));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            EntityAttribute magicDamageAttribute = Registry.ATTRIBUTE.get(WizardEx.magic_resist);
+            var magicResist = AttributeUtils.getAttributeValue(entity, magicDamageAttribute) * 100;
             var statFormatted = new DecimalFormat("###");
+            return Text.of(statFormatted.format(magicResist) + "%");
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.magic_resist").styled(style -> style.withColor(Formatting.GRAY)));
+            return tooltip;
+        }, 146, 35));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            var critChance = SpellPower.getHaste(entity) * 100 - 100;
+            var statFormatted = new DecimalFormat("###.##");
             return Text.of( statFormatted.format(critChance) + "%");
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.crit_chance")));
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.haste").styled(style -> style.withColor(Formatting.GRAY)));
             return tooltip;
-        }, 143, 50));
+        }, 146, 50));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            var critChance = SpellPower.getCriticalChance(entity) * 100;
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of( statFormatted.format(critChance) + "%");
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.crit_chance").styled(style -> style.withColor(Formatting.GRAY)));
+            return tooltip;
+        }, 146, 65));
         COMPONENTS.add(RenderComponent.of(entity -> {
             var critDmg = SpellPower.getCriticalMultiplier(entity) * 100;
             var statFormatted = new DecimalFormat("###");
             return Text.of(statFormatted.format(critDmg) + "%");
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.crit_damage")));
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.crit_damage").styled(style -> style.withColor(Formatting.GRAY)));
             return tooltip;
-        }, 143, 65));
+        }, 146, 80));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            EntityAttribute tamedDamageAttribute = Registry.ATTRIBUTE.get(WizardEx.tamed_damage);
+            var tamedDamage = AttributeUtils.getAttributeValue(entity, tamedDamageAttribute);
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of(statFormatted.format(tamedDamage));
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.tamed_damage").styled(style -> style.withColor(Formatting.GRAY)));
+            return tooltip;
+        }, 146, 95));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            EntityAttribute tamedDamageAttribute = Registry.ATTRIBUTE.get(WizardEx.tamed_resist);
+            var tamedResist = AttributeUtils.getAttributeValue(entity, tamedDamageAttribute);
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of(statFormatted.format(tamedResist));
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.tamed_resist").styled(style -> style.withColor(Formatting.GRAY)));
+            return tooltip;
+        }, 146, 110));
 
 
 
@@ -337,14 +376,13 @@ public class MagicPageLayer extends PageLayer {
         COMPONENTS.add(RenderComponent.of(entity -> {
             var school = SpellPower.getSpellPower(MagicSchool.FIRE, entity);
             var value = school.baseValue();
-            var statFormatted = new DecimalFormat("#.##");
+            var statFormatted = new DecimalFormat("###.##");
             return Text.of(statFormatted.format(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.fire_bonus")));
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.fire_bonus").styled(style -> style.withColor(Formatting.GRAY)));
             return tooltip;
-        }, 32, 47));
+        }, 64, 25));
         COMPONENTS.add(RenderComponent.of(entity -> {
             var school = SpellPower.getSpellPower(MagicSchool.FROST, entity);
             var value = school.baseValue();
@@ -352,19 +390,9 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(statFormatted.format(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.frost_bonus")));
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.frost_bonus").styled(style -> style.withColor(Formatting.GRAY)));
             return tooltip;
-        }, 32, 67));
-        COMPONENTS.add(RenderComponent.of(entity -> {
-            var school = SpellPower.getSpellPower(MagicSchool.HEALING, entity);
-            var value = school.baseValue();
-            return Text.of(String.valueOf(value));
-        }, entity -> {
-            List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.of("Healing")));
-            return tooltip;
-        }, 32, 107));
+        }, 64, 45));
         COMPONENTS.add(RenderComponent.of(entity -> {
             var school = SpellPower.getSpellPower(MagicSchool.ARCANE, entity);
             var value = school.baseValue();
@@ -372,9 +400,38 @@ public class MagicPageLayer extends PageLayer {
             return Text.of(statFormatted.format(value));
         }, entity -> {
             List<Text> tooltip = new ArrayList<Text>();
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.arcane_bonus")));
-            tooltip.add((Text.translatable("wizardex.gui.page.tooltip.item_bonus")));
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.arcane_bonus").styled(style -> style.withColor(Formatting.GRAY)));
             return tooltip;
-        }, 32, 87));
+        }, 64, 65));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            var school = SpellPower.getSpellPower(MagicSchool.HEALING, entity);
+            var value = school.baseValue();
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of(statFormatted.format(value));
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.healing_bonus").styled(style -> style.withColor(Formatting.GRAY)));
+            return tooltip;
+        }, 64, 85));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            var school = SpellPower.getSpellPower(MagicSchool.LIGHTNING, entity);
+            var value = school.baseValue();
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of(statFormatted.format(value));
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.lightning_bonus").styled(style -> style.withColor(Formatting.GRAY)));
+            return tooltip;
+        }, 64, 105));
+        COMPONENTS.add(RenderComponent.of(entity -> {
+            var school = SpellPower.getSpellPower(MagicSchool.SOUL, entity);
+            var value = school.baseValue();
+            var statFormatted = new DecimalFormat("###.##");
+            return Text.of(statFormatted.format(value));
+        }, entity -> {
+            List<Text> tooltip = new ArrayList<Text>();
+            tooltip.add(Text.translatable("wizardex.gui.page.tooltip.soul_bonus").styled(style -> style.withColor(Formatting.GRAY)));
+            return tooltip;
+        }, 64, 125));
     }
 }

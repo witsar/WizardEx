@@ -8,7 +8,8 @@
             "wizardex:spell_power_frost": 0.0,
             "wizardex:spell_power_lightning": 0.0,
             "wizardex:spell_power_healing": 0.0,
-            "wizardex:spell_power_arcane": 0.0
+            "wizardex:spell_power_arcane": 0.0,
+            "wizardex:spell_power_soul": 0.0
         }
     }
 }
